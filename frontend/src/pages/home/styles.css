@@ -1,0 +1,35 @@
+.home-title {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  flex: 1;
+}
+
+.home-title-logo {
+  width: 15%;
+  height: 15%;
+  margin-right: 30px;
+}
+
+.home-title-text {
+  flex-direction: column;
+  flex: 1;
+  align-self: center;
+}
+
+.home-title-text1 {
+  font-family: 'Qatar2022Arabic-Bold';
+  font-size: 70px;
+  line-height: 1.1;
+}
+
+.home-title-text2 {
+  font-family: 'Qatar2022Arabic-Bold';
+  font-size: 80px;
+  line-height: 1.1;
+}
+
+.home-text {
+  text-align: center;
+  font-size: 30px;
+}

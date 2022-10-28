@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Qatar2022Arabic-Bold';
+  src: local('Qatar2022Arabic-Bold'), url(../src/assets/fonts/Qatar2022Arabic-Bold.ttf);
+}
+
+@font-face {
+  font-family: Qatar2022Arabic-Heavy;
+  src: url(../src/assets/fonts/Qatar2022Arabic-Heavy.ttf)
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 100vh;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background: linear-gradient(90deg, rgba(46, 16, 33, 1) 0%, rgba(79, 15, 41, 1) 35%, rgba(109, 32, 58, 1) 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
