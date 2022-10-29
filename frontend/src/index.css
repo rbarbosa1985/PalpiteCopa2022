@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 @font-face {
   font-family: 'Qatar2022Arabic-Bold';
   src: local('Qatar2022Arabic-Bold'), url(../src/assets/fonts/Qatar2022Arabic-Bold.ttf);
@@ -8,12 +10,12 @@
   src: url(../src/assets/fonts/Qatar2022Arabic-Heavy.ttf)
 }
 
+
+
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   justify-content: center;
-  flex: 1;
   min-height: 100vh;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -23,4 +25,46 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --color-turquoise: #00D4FF;
+  --color-coral: #ed7947;
+  --color-dimgray: #4c5d67;
+  --color-darkslategray: #37474f;
+  --color-black: #0b1f34;
+}
+
+.card-base {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 100px 100px 100px rgba(0, 0, 0, .25);
+}
+
+.input-base {
+  border: 1px solid #E1E1E1;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 50px;
+  width: 100%;
+}
+
+.input-base::placeholder {
+  color: #9e9e9e;
+}
+
+.margin-bottom-30 {
+  margin-bottom: 30px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

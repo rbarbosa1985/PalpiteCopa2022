@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.form {
+  flex: 1;
+  padding: 20px;
+}
+
+.h1-text {
+  text-align: center;
+  font-family: 'Qatar2022Arabic-Bold';
+  color: #9e9e9e;
+}
+
+.form-names {
+  color: #9e9e9e;
+}
+
+.base-form-action {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-cancelar {
+  width: 150px;
+  align-items: center;
+}
+
+.form-salvar {
+  width: 150px;
+  margin-right: 20px;
+  align-items: center;
+}
