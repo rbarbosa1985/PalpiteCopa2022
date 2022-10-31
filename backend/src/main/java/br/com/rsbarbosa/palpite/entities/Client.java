@@ -24,9 +24,6 @@ public class Client implements Serializable {
 	private String name;
 	private String email;
 	private Integer age;
-	/*
-	@OneToMany(mappedBy = "client")
-	private List<Guess> guess = new ArrayList<>();*/
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;

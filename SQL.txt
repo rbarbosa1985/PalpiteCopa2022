@@ -1,0 +1,8 @@
+select winner_id, count(winner_id) from tb_guess group by winner_id order by 2 desc limit 1 
+
+select vice_id, count(vice_id) from tb_guess group by vice_id order by 2 desc limit 1 
+
+select third_id, count(third_id) from tb_guess group by third_id order by 2 desc limit 1 
+
+
+select a.*, b.*, c.* from (select winner_id, count(winner_id) from tb_guess group by winner_id order by 2 desc limit 1) as a, (select vice_id, count(vice_id) from tb_guess group by vice_id order by 2 desc limit 1) as b, (select third_id, count(third_id) from tb_guess group by third_id order by 2 desc limit 1) as c

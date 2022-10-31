@@ -2,8 +2,6 @@ package br.com.rsbarbosa.palpite.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -26,15 +23,6 @@ public class Team implements Serializable {
 	private Long id;
 	private String name;
 	private String imgUrl;
-	
-	@OneToMany(mappedBy = "winnera")
-	private List<Guess> winners = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "vices")
-	private List<Guess> vices = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "thirds")
-	private List<Guess> thirds = new ArrayList<>();
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;

@@ -23,22 +23,22 @@ public class Guess  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	/*
+	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
-	private Long client;*/
+	private Client client;
 	
 	@ManyToOne
 	@JoinColumn(name = "winner_id")
-	private Long winner;
+	private Team winner;
 	
 	@ManyToOne
 	@JoinColumn(name = "vice_id")
-	private Long vice;
+	private Team vice;
 	
 	@ManyToOne
 	@JoinColumn(name = "third_id")
-	private Long third;
+	private Team third;
 	
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -50,10 +50,11 @@ public class Guess  implements Serializable {
 	public Guess() {
 		
 	}
-
-	public Guess(Long id, Long client, Long winner, Long vice, Long third) {
+	
+	public Guess(Long id, Client client, Team winner, Team vice, Team third) {
+		super();
 		this.id = id;
-		//this.client = client;
+		this.client = client;
 		this.winner = winner;
 		this.vice = vice;
 		this.third = third;
@@ -66,39 +67,39 @@ public class Guess  implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//
-//	public Long getClient() {
-//		return client;
-//	}
-//
-//	public void setClient(Long client) {
-//		this.client = client;
-//	}
+	
+	public Client getClient() {
+		return client;
+	}
 
-	public Long getWinner() {
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Team getWinner() {
 		return winner;
 	}
 
-	public void setWinner(Long winner) {
+	public void setWinner(Team winner) {
 		this.winner = winner;
 	}
 
-	public Long getVice() {
+	public Team getVice() {
 		return vice;
 	}
 
-	public void setVice(Long vice) {
+	public void setVice(Team vice) {
 		this.vice = vice;
 	}
 
-	public Long getThird() {
+	public Team getThird() {
 		return third;
 	}
 
-	public void setThird(Long third) {
+	public void setThird(Team third) {
 		this.third = third;
 	}
-	
+
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
