@@ -62,28 +62,52 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.cors().configurationSource(corsConfigurationSource());
 	}
 	
+//	@Bean
+//	CorsConfigurationSource corsConfigurationSource() {
+//
+//		String[] origins = corsOrigins.split(",");
+//
+//	    CorsConfiguration corsConfig = new CorsConfiguration();
+//	    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
+//	    corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
+//	    corsConfig.setAllowCredentials(true);
+//	    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+//	 
+//	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//	    source.registerCorsConfiguration("/**", corsConfig);
+//	    return source;
+//	}
+//
+//	@Bean
+//	FilterRegistrationBean<CorsFilter> corsFilter() {
+//	    FilterRegistrationBean<CorsFilter> bean
+//	            = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+//	    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//	    return bean;
+//	}
+	
+	
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
+		
+		CorsConfiguration corsConfig = new CorsConfiguration();
+		corsConfig.setAllowedOrigins(Arrays.asList("http://192.168.1.22:5173"));
+		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
+		corsConfig.setAllowCredentials(true);
+		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
 
-		String[] origins = corsOrigins.split(",");
-
-	    CorsConfiguration corsConfig = new CorsConfiguration();
-	    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
-	    corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-	    corsConfig.setAllowCredentials(true);
-	    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-	 
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    source.registerCorsConfiguration("/**", corsConfig);
-	    return source;
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+		return source;
 	}
 
 	@Bean
 	FilterRegistrationBean<CorsFilter> corsFilter() {
-	    FilterRegistrationBean<CorsFilter> bean
-	            = new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
-	    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	    return bean;
+		FilterRegistrationBean<CorsFilter> bean 
+			= new FilterRegistrationBean<>(new CorsFilter(corsConfigurationSource()));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
 	}
+	
 }
 

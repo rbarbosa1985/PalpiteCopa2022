@@ -41,6 +41,12 @@ public class Client implements Serializable {
 		this.email = email;
 		this.age = age;
 	}
+	
+	public Client(String name, String email, Integer age) {
+		this.name = name;
+		this.email = email;
+		this.age = age;
+	}
 
 	public Long getId() {
 		return id;

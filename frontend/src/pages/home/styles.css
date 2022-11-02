@@ -5,26 +5,43 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: black;
+}
+
+.card-home {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-home-content {
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: white;
 }
 
 .home-title {
   text-align: center;
   margin: 40px;
-  transform: rotate(340deg);
+}
+
+.home-card-logo {
+  border-right: 1px groove gold;
+  box-sizing: border-box;
 }
 
 .home-title-text {
-  font-family: 'Pacifico';
-  text-shadow: 2px 2px #ff0000;
+  color: goldenrod;
+  text-shadow: 2px 2px #000;
   font-size: 50px;
 }
 
-.home-title-logo {
-  width: 50%;
-  height: 50%;
-}
-
 .home-text {
+  color: goldenrod;
   display: flex;
   flex: 1;
   align-self: center;
@@ -42,32 +59,30 @@
 }
 
 .option {
-  width: 150px;
+  width: 100%;
   margin: 20px;
   padding: 10px;
 }
 
 .home-rodape {
+  margin-top: 30px;
   justify-content: center;
   display: flex;
   flex-direction: row;
   text-align: center;
-  flex: 1;
-  align-self: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .home-rodape-logo {
   width: 10%;
   height: 10%;
   margin-right: 30px;
-  align-self: end;
 }
 
 .home-rodape-text {
+  display: flex;
   flex-direction: column;
-  align-self: end;
+  justify-content: center;
+  color: white;
 }
 
 .home-rodape-text1 {
@@ -76,4 +91,21 @@
 
 .home-rodape-text2 {
   font-size: 30px;
+}
+
+@media (max-width: 600px) {
+  .home-content {
+    min-height: 80vh;
+
+  }
+
+  .card-home {
+    flex-direction: column;
+    padding: 0px;
+  }
+
+  .home-card-logo {
+    display: none;
+  }
+
 }

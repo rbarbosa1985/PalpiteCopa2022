@@ -1,0 +1,42 @@
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Alex', 'Brown', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (first_name, last_name, email, password) VALUES ('Maria', 'Green', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
+INSERT INTO tb_role (authority) VALUES ('ROLE_ADMIN');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Qatar', 'Qatar' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Equador', 'Equador' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Senegal', 'Senegal' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Holanda', 'Holanda' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Inglaterra', 'Inglaterra' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Irã', 'Ira' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('EUA', 'EUA' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('País de Gales', 'Pais' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Argentina', 'Argentina' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Arábia Saudita', 'Arabia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('México', 'Mexico' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Polônia', 'Polonia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('França', 'Franca' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Dinamarca', 'Dinamarca' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Tunísia', 'Tunisia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Austrália', 'Australia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Espanha', 'Espanha' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Alemanha', 'Alemanha' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Japão', 'Japao' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Costa Rica', 'Costa' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Bélgica', 'Belgica' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Canadá', 'Canada' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Marrocos', 'Marrocos' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Croácia', 'Croacia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Brasil', 'Brasil' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Sérvia', 'Servia' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Suíça', 'Suica' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Camarões', 'Camaroes' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Portugal', 'Portugal' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Gana', 'Gana' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Uruguai', 'Uruguai' , NOW());
+INSERT INTO tb_team (name, img_url, created_At) VALUES ('Coreia do Sul', 'Coreia' , NOW());

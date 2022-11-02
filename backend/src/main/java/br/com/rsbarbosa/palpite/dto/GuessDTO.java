@@ -1,6 +1,7 @@
 package br.com.rsbarbosa.palpite.dto;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import br.com.rsbarbosa.palpite.entities.Guess;
 
@@ -12,6 +13,7 @@ public class GuessDTO implements Serializable {
 	private TeamDTO winner;
 	private TeamDTO vice;
 	private TeamDTO third;
+	private Instant createdAt;
 	
 	public GuessDTO() {
 		
@@ -31,6 +33,7 @@ public class GuessDTO implements Serializable {
 		winner = new TeamDTO(entity.getWinner());
 		vice = new TeamDTO(entity.getVice());
 		third = new TeamDTO(entity.getThird());
+		createdAt = entity.getCreatedAt();
 	}
 
 	public Long getId() {
@@ -73,4 +76,7 @@ public class GuessDTO implements Serializable {
 		this.third = third;
 	}
 
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
 }

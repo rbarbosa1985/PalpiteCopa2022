@@ -1,49 +1,72 @@
-import "./styles.css";
+import { useCallback, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
+import { useNavigate } from "react-router-dom";
+
+import { GuessResponse } from "../../types/Guess";
+import { PartialType } from "../../types/Partial";
+import { pieOptions } from "../../utils/chart-options";
+import { formatDate } from "../../utils/date";
+import { makeRequest } from "../../utils/request";
+
+import "./styles.css";
 
 function Partial() {
 
-  const state = {
-    options: {
-      chart: {
-        background: "transparent",
-        foreColor: "red"
-      },
-      colors: ["#a8dadc", "#ed7947", "#00D4FF", "#ffd6a5"],
-      legend: {
-        show: false
-      },
-      tooltip: {
-        enabled: true
-      },
-      plotOptions: {
-        pie: {
-          customScale: 1.0,
-          expandOnClick: false,
-          dataLabels: {
-            offset: 60,
-          },
-        },
-      }
-    },
-    series: [20, 30, 10, 40],
-    labels: ['A', 'B', 'C', 'D']
+  const [partialResponse, setPartialResponse] = useState<PartialType>({
+    winner: ["Brasil", "", ""],
+    vote_winner: [1, 0, 0],
+    vice: ["Brasil", "Argentina", "Alemanha"],
+    vote_vice: [0, 1, 0],
+    third: ["Brasil", "Argentina", "Alemanha"],
+    vote_third: [0, 0, 1]
+  });
+  const [guessResponse, setGuessResponse] = useState<GuessResponse>();
+  const [activePage, setActivePage] = useState(0);
+  const navigate = useNavigate();
+
+  const getPartial = () => {
+    makeRequest({ url: '/guess/partial' })
+      .then(response => setPartialResponse(response.data));
+    console.log(partialResponse);
   }
+
+  const getGuess = useCallback(() => {
+    const params = {
+      page: activePage,
+      size: 12,
+    }
+    makeRequest({ url: '/guess', params }).then(response => setGuessResponse(response.data));
+    console.log(guessResponse);
+  }, [activePage])
+
+  useEffect(() => {
+    getGuess();
+    getPartial();
+  }, [getGuess])
+
+  const handleClickBack = () => {
+    navigate("/");
+  }
+
   return (
     <div className="partial-container">
       <div className="partial-content">
+        <div className="card-title card-base">
+          <h1>Votação Parcial</h1>
+        </div>
         <div className="card-content">
+
           <div className="card-base card-graph">
             <h1 className="title">Vencedor</h1>
-            <Chart options={state.options} series={state.series} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse.winner }} series={partialResponse.vote_winner} type="donut" width="320" />
           </div>
           <div className="card-base card-vice card-graph">
             <h1 className="title">Vice Campeão</h1>
-            <Chart options={state.options} series={state.series} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse?.vice }} series={partialResponse?.vote_vice} type="donut" width="320" />
           </div>
           <div className="card-base card-graph">
             <h1 className="title">Terceiro Colocado</h1>
-            <Chart options={state.options} series={state.series} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse?.third }} series={partialResponse?.vote_third} type="donut" width="320" />
           </div>
         </div>
         <div className="card-base card-table">
@@ -59,39 +82,16 @@ function Partial() {
               </tr>
             </thead>
             <tbody>
-              {/* {recordsResponse?.content.map(record =>( */}
-              <tr key="1">
-                <td>29/10/2022</td>
-                <td>Roberto Barbosa</td>
-                <td>37</td>
-                <td>Brasil</td>
-                <td>Argentina</td>
-                <td>Chile</td>
-              </tr>
-              <tr key="2">
-                <td>29/10/2022</td>
-                <td>Roberto Barbosa</td>
-                <td>37</td>
-                <td>Brasil</td>
-                <td>Argentina</td>
-                <td>Chile</td>
-              </tr>
-              <tr key="3">
-                <td>29/10/2022</td>
-                <td>Roberto Barbosa</td>
-                <td>37</td>
-                <td>Brasil</td>
-                <td>Argentina</td>
-                <td>Chile</td>
-              </tr>
-              <tr key="4">
-                <td>29/10/2022</td>
-                <td>Roberto Barbosa</td>
-                <td>37</td>
-                <td>Brasil</td>
-                <td>Argentina</td>
-                <td>Chile</td>
-              </tr>
+              {guessResponse?.content.map(guess => (
+                <tr key={guess.id}>
+                  <td>{formatDate(guess.client.createdAt)}</td>
+                  <td>{guess.client.name}</td>
+                  <td>{guess.client.age}</td>
+                  <td>{guess.winner.name}</td>
+                  <td>{guess.vice.name}</td>
+                  <td>{guess.third.name}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -102,6 +102,10 @@ function Partial() {
           onChange={(page) => handleChangePage(page)}
         />
       )} */}
+        <div className="card-total card-base">
+          <button type="button" onClick={handleClickBack} className="btn btn-outline-danger option-back">Voltar</button>
+          <h4 className="total">Total: {guessResponse?.totalElements}</h4>
+        </div>
       </div>
     </div>
   )

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.rsbarbosa.palpite.dto.CadGuessDTO;
 import br.com.rsbarbosa.palpite.dto.GraphDTO;
 import br.com.rsbarbosa.palpite.dto.GuessDTO;
 import br.com.rsbarbosa.palpite.services.GuessService;
@@ -46,17 +47,17 @@ public class GuessResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<GuessDTO> insert(@RequestBody GuessDTO dto) {
-		dto = service.insert(dto);
+	public ResponseEntity<GuessDTO> insert(@RequestBody CadGuessDTO dto) {
+		GuessDTO newDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
+		return ResponseEntity.created(uri).body(newDto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<GuessDTO> update(@PathVariable Long id, @RequestBody GuessDTO dto) {
-		dto = service.update(id, dto);
-		return ResponseEntity.ok().body(dto);
+	public ResponseEntity<GuessDTO> update(@PathVariable Long id, @RequestBody CadGuessDTO dto) {
+		GuessDTO newDto = service.update(id, dto);
+		return ResponseEntity.ok().body(newDto);
 	}
 
 	@DeleteMapping(value = "/{id}")

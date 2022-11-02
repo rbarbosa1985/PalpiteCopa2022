@@ -1,5 +1,7 @@
 package br.com.rsbarbosa.palpite.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -28,6 +30,18 @@ public class TeamService {
 	public Page<TeamDTO> findAllPaged(Pageable pageable) {
 		Page<Team> list = repository.findAll(pageable);
 		return list.map(x -> new TeamDTO(x));
+	}
+	
+	@Transactional(readOnly = true)
+	public List<TeamDTO> findAll() {
+		List<Team> list = repository.findAll();
+		List<TeamDTO> list2 = new ArrayList<>();
+		
+		for (Team team : list) {
+			list2.add(new TeamDTO(team));
+		}
+		
+		return list2;
 	}
 
 	@Transactional(readOnly = true)
@@ -74,4 +88,6 @@ public class TeamService {
 		entity.setName(dto.getName());
 		entity.setImgUrl(dto.getImgUrl());
 	}
+
+
 }

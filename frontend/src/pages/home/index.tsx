@@ -1,6 +1,8 @@
-import "./styles.css";
-import Logo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
+
+import Taca from "../../assets/images/taca.png";
+
+import "./styles.css";
 
 function Home() {
 
@@ -17,28 +19,24 @@ function Home() {
   return (
     <div className="home-container">
       <div className="home-content">
-        <div className="home-title">
-          <h1 className="home-title-text">BOLÃO</h1>
-          <h1 className="home-title-text">da</h1>
-          <h1 className="home-title-text">COPA DO MUNDO 2022</h1>
-        </div>
-        <div className="home-text">
-          <p>
-            Participe do nosso bolão.
-          </p>
-          <p>
-            Acerte as seleções vencedoras da copa e ganhe os melhores prêmios da internet!!
-          </p>
-        </div>
-        <div className="home-options">
-          <button type="button" onClick={handleClickPartial} className="btn-lg btn btn-warning option">Parcial</button>
-          <button type="button" onClick={handleClickGuess} className="btn-lg btn btn-success option">Palpitar</button>
-        </div>
-        <div className="home-rodape">
-          <img src={Logo} alt="logo" className="home-rodape-logo" />
-          <div className="home-rodape-text">
-            <h1 className="home-rodape-text1">COPA DO MUNDO FIFA</h1>
-            <h1 className="home-rodape-text2">Qatar 2022 </h1>
+        <div className="card-home">
+          <img src={Taca} alt="logo" className="home-card-logo" />
+          <div className="card-home-content">
+            <div className="home-title">
+              <h1 className="home-title-text">Quem será o grande <br />campeão da copa do mundo?</h1>
+            </div>
+            <div className="home-text">
+              <p>
+                Aproveite nossa campanha e deixe seu palpite <br />sobre quem será o grande vencedor da copa do mundo Fifa 2022!!
+              </p>
+              <p>
+                Acertertando as seleções vencedoras da copa, <br />você concorrerá aos melhores prêmios da internet!!
+              </p>
+            </div>
+            <div className="home-options">
+              <button type="button" onClick={handleClickPartial} className="btn btn-lg btn-primary option">Parcial</button>
+              <button type="button" onClick={handleClickGuess} className="btn btn-lg btn-success option">Palpitar</button>
+            </div>
           </div>
         </div>
       </div>

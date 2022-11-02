@@ -1,8 +1,12 @@
-import "./styles.css";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/logo.png";
+import { toast } from "react-toastify";
+
+import { TeamResponse } from "../../types/Team";
+import { makeRequest } from "../../utils/request";
+
+import "./styles.css";
 
 type FormState = {
   name: string;
@@ -14,24 +18,47 @@ type FormState = {
 }
 
 function Guess() {
-
+  const [teamsResponse, setTeamsResponse] = useState<TeamResponse>();
   const { register, handleSubmit, formState: { errors } } = useForm<FormState>();
   const navigate = useNavigate();
 
+  const getTeams = () => {
+    const params = {
+      size: 50,
+      sort: "name"
+    }
+
+    makeRequest({ url: '/teams', params })
+      .then(response => setTeamsResponse(response.data));
+  }
+
+  useEffect(() => {
+    getTeams();
+  }, [])
 
   const handleCancel = () => {
     navigate("/");
   }
 
-  const onSubmit = (/*data: FormState*/) => {
-
+  const onSubmit = (data: FormState) => {
+    makeRequest({
+      method: "POST",
+      url: "/guess",
+      data
+    }).then(() => {
+      toast.info("Palpite cadastrado com sucesso!");
+      navigate("/partial");
+    }).catch(() => {
+      toast.error("Erro ao salvar o palpite!!")
+    });
+    console.log(data);
   }
 
   return (
     <div className="container">
       <form onSubmit={handleSubmit(onSubmit)} className="form card-base">
         <div>
-          <h1 className="h1-text">Palpite</h1>
+          <h1 className="h1-text">Cadastre seu Palpite</h1>
         </div>
         <div className="margin-bottom-30">
           <p className="form-names">Nome:</p>
@@ -83,9 +110,7 @@ function Guess() {
         <div className="margin-bottom-30">
           <p className="form-names">Campeão:</p>
           <select {...register("winner", { required: "Campo Obrigatório" })} className="form-control  input-base">
-            <option value="Brasil">Brasil</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
+            {teamsResponse && (teamsResponse.content.map(team => (<option value={team.id} key={team.id}>{team.name}</option>)))}
           </select>
           {errors.winner && (
             <div className="invalid-feedback d-block">
@@ -97,9 +122,7 @@ function Guess() {
         <div className="margin-bottom-30">
           <p className="form-names">Vice Campeão:</p>
           <select {...register("vice", { required: "Campo Obrigatório" })} className="form-control  input-base">
-            <option value="Brasil">Brasil</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
+            {teamsResponse && (teamsResponse.content.map(team => (<option value={team.id} key={team.id}>{team.name}</option>)))}
           </select>
           {errors.vice && (
             <div className="invalid-feedback d-block">
@@ -111,9 +134,7 @@ function Guess() {
         <div className="margin-bottom-30">
           <p className="form-names">Terceiro Lugar:</p>
           <select {...register("third", { required: "Campo Obrigatório" })} className="form-control  input-base">
-            <option value="Brasil">Brasil</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Chile">Chile</option>
+            {teamsResponse && (teamsResponse.content.map(team => (<option value={team.id} key={team.id}>{team.name}</option>)))}
           </select>
           {errors.third && (
             <div className="invalid-feedback d-block">
@@ -123,12 +144,13 @@ function Guess() {
         </div>
 
         <div className="base-form-action">
-          <button className="btn btn-success border-radius-10 btn-lg form-salvar">
-            SALVAR
-          </button>
-          <button type="button" className="btn btn-danger border-radius-10 btn-lg form-cancelar" onClick={handleCancel}>
+          <button type="button" className="btn btn-outline-danger border-radius-10 btn-lg form-cancelar" onClick={handleCancel}>
             CANCELAR
           </button>
+          <button className="btn btn-outline-success border-radius-10 btn-lg form-salvar">
+            SALVAR
+          </button>
+
         </div>
       </form>
     </div>
