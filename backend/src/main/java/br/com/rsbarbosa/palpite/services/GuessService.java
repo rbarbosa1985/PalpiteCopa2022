@@ -86,47 +86,60 @@ public class GuessService {
 		List<ResultDTO> winner = repository.winner();
 		List<ResultDTO> vice = repository.vice();
 		List<ResultDTO> third = repository.third();
-		int i = 0;
 		
-		String[] win = new String[3];
-		Long[] v_win = new Long[3];
-		
-		for (ResultDTO result : winner) {
-			if (i <= 3) {
-				win[i] = result.getTeam().getName();
-				v_win[i] = result.getVote();
+		if (winner.size() > 0) {
+			int j = winner.size();
+			
+			if (j >=3) {
+				j = 3;
 			}
-		}
-		i=0;
-		String[] vic = new String[3];
-		Long[] v_vic = new Long[3];
-
-		for (ResultDTO result : vice) {
-			if (i <= 3) {
-				vic[i] = result.getTeam().getName();
-				v_vic[i] = result.getVote();
+			
+			String[] win = new String[j];
+			Long[] v_win = new Long[j];
+			for (int i = 0; i < j; i++) {
+				win[i] = winner.get(i).getTeam().getName();
+				v_win[i] = winner.get(i).getVote();			
 			}
+			
+			dto.setWinner(win);
+			dto.setVote_winner(v_win);
 		}
 		
-		i=0;
-		
-		String[] thi = new String[3];
-		Long[] v_thi = new Long[3];
-
-		for (ResultDTO result : third) {
-			if (i <= 3) {
-				thi[i] = result.getTeam().getName();
-				v_thi[i] = result.getVote();
+		if (vice.size() > 0) {		
+			int j = vice.size();
+			
+			if (j >=3) {
+				j = 3;
 			}
+			String[] vic = new String[j];
+			Long[] v_vic = new Long[j];
+			
+			for (int i = 0; i < j; i++) {
+				vic[i] = vice.get(i).getTeam().getName();
+				v_vic[i] = vice.get(i).getVote();
+			}
+			
+			dto.setVice(vic);
+			dto.setVote_vice(v_vic);
 		}
-
-		dto.setWinner(win);
-		dto.setVice(vic);
-		dto.setThird(thi);
-		dto.setVote_winner(v_win);
-		dto.setVote_vice(v_vic);
-		dto.setVote_third(v_thi);
-
+		
+		if (third.size() > 0) {
+			int j = third.size();
+			
+			if (j >=3) {
+				j = 3;
+			}
+			String[] thi = new String[j];
+			Long[] v_thi = new Long[j];	
+			
+			for (int i = 0; i < j; i++) {
+				thi[i] = third.get(i).getTeam().getName();
+				v_thi[i] = third.get(i).getVote();
+			}
+			dto.setThird(thi);
+			dto.setVote_third(v_thi);
+		}
+		
 		return dto;
 	}
 

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../../assets/components/Pagination";
 
 import { GuessResponse } from "../../types/Guess";
 import { PartialType } from "../../types/Partial";
@@ -33,7 +34,7 @@ function Partial() {
   const getGuess = useCallback(() => {
     const params = {
       page: activePage,
-      size: 12,
+      size: 8,
     }
     makeRequest({ url: '/guess', params }).then(response => setGuessResponse(response.data));
     console.log(guessResponse);
@@ -48,6 +49,10 @@ function Partial() {
     navigate("/");
   }
 
+  const handleChangePage = (page: number) => {
+    setActivePage(page);
+  };
+
   return (
     <div className="partial-container">
       <div className="partial-content">
@@ -58,15 +63,15 @@ function Partial() {
 
           <div className="card-base card-graph">
             <h1 className="title">Vencedor</h1>
-            <Chart options={{ ...pieOptions, labels: partialResponse.winner }} series={partialResponse.vote_winner} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse.winner, legend: { position: "bottom" } }} series={partialResponse.vote_winner} type="donut" width="320" />
           </div>
           <div className="card-base card-vice card-graph">
             <h1 className="title">Vice Campeão</h1>
-            <Chart options={{ ...pieOptions, labels: partialResponse?.vice }} series={partialResponse?.vote_vice} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse.vice, legend: { position: "bottom" } }} series={partialResponse.vote_vice} type="donut" width="320" />
           </div>
           <div className="card-base card-graph">
             <h1 className="title">Terceiro Colocado</h1>
-            <Chart options={{ ...pieOptions, labels: partialResponse?.third }} series={partialResponse?.vote_third} type="donut" width="320" />
+            <Chart options={{ ...pieOptions, labels: partialResponse.third, legend: { position: "bottom" } }} series={partialResponse.vote_third} type="donut" width="320" />
           </div>
         </div>
         <div className="card-base card-table">
@@ -95,13 +100,13 @@ function Partial() {
             </tbody>
           </table>
         </div>
-        {/* {guestsResponse && guestsResponse.totalPages > 1 && (
-        <Pagination
-          totalPages={guestsResponse.totalPages}
-          activePage={activePage}
-          onChange={(page) => handleChangePage(page)}
-        />
-      )} */}
+        {guessResponse && guessResponse.totalPages > 1 && (
+          <Pagination
+            totalPages={guessResponse.totalPages}
+            activePage={activePage}
+            onChange={(page) => handleChangePage(page)}
+          />
+        )}
         <div className="card-total card-base">
           <button type="button" onClick={handleClickBack} className="btn btn-outline-danger option-back">Voltar</button>
           <h4 className="total">Total: {guessResponse?.totalElements}</h4>
