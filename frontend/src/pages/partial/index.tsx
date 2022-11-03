@@ -28,7 +28,6 @@ function Partial() {
   const getPartial = () => {
     makeRequest({ url: '/guess/partial' })
       .then(response => setPartialResponse(response.data));
-    console.log(partialResponse);
   }
 
   const getGuess = useCallback(() => {
@@ -89,7 +88,7 @@ function Partial() {
             <tbody>
               {guessResponse?.content.map(guess => (
                 <tr key={guess.id}>
-                  <td>{formatDate(guess.client.createdAt)}</td>
+                  <td>{formatDate(guess.createdAt)}</td>
                   <td>{guess.client.name}</td>
                   <td>{guess.client.age}</td>
                   <td>{guess.winner.name}</td>
